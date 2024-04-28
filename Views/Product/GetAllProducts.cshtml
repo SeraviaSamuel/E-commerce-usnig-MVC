@@ -1,0 +1,104 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "GetAllProducts";
+    Layout = "_Layout";
+}
+
+<style>
+    /* CSS styles to set fixed dimensions for the images */
+    .popular-img img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 200px; /* Set the maximum height */
+    }
+</style>
+
+<main>
+    <!-- breadcrumb Start-->
+    <div class="page-notification">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- listing Area Start -->
+    <div class="category-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-7 col-lg-8 col-md-10">
+                    <div class="section-tittle mb-50">
+                        <h2>Shop with us</h2>
+                       
+                    </div>
+                </div>
+            </div>
+            
+                <div class="col-xl-9 col-lg-9 col-md-8 ">
+                    <!--? New Arrival Start -->
+                <div class="new-arrival new-arrival2 d-flex justify-content-center">
+                        <div class="row">
+                            @foreach (Product p in Model)
+                            {
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                    <div class="single-new-arrival mb-50 text-center">
+                                        <div class="popular-img">
+                                            <img src="/img/gallery/@p.Image_Url" alt="">
+                                        <div class="favorit-items">
+                                            <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@p.Id">
+                                                <img src="/img/gallery/favorit-card.png" alt="">
+                                            </a>
+                                        </div>
+
+                                        </div>
+                                        <div class="popular-caption">
+                                            <h3><a href="/Product/Details?id=@p.Id">@p.Name</a></h3>
+                                            <div class="rating mb-10">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span>@p.Price</span>
+                                            <div>
+                                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@p.Id" class="btn my-2 ">Add To Cart</a>
+                                                <a asp-controller="Product" asp-action="AddToWishList" asp-route-productId="@p.Id" class="btn ">Add To Wishlist</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+      
+        </div>
+    </div>
+</main>
+
+<!--? Search model Begin -->
+<div class="search-model-box">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-btn">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Searching key.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
+<!-- Scroll Up -->
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
